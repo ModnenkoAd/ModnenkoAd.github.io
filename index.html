@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Адвокатская контора Натальи Долгановой</title>
+<meta name="description" content="Профессиональная юридическая помощь. Конфиденциально, прозрачно, с фокусом на ваши интересы.">
+<style>
+:root {
+--bg: #0f172a;
+--bg-alt: #1e293b;
+--text: #f8fafc;
+--text-muted: #94a3b8;
+--accent: #b48a5a;
+--accent-hover: #9a7448;
+--border: #334155;
+--radius: 8px;
+--font-main: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+--font-serif: Georgia, 'Times New Roman', serif;
+--header-h: 60px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+body { font-family: var(--font-main); background: var(--bg); color: var(--text); line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent); }
+button, input, textarea, select { font-family: inherit; font-size: inherit; }
+ul, ol { list-style: none; }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+section { padding: 3rem 0; }
+h1, h2, h3 { font-family: var(--font-serif); line-height: 1.2; margin-bottom: 1rem; }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); text-align: center; margin-bottom: 2.5rem; }
+h3 { font-size: 1.25rem; color: var(--text); }
+p { margin-bottom: 1rem; color: var(--text-muted); }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 500; transition: background 0.2s, transform 0.1s; min-height: 44px; }
+.btn:hover { background: var(--accent-hover); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+.btn-outline:hover { background: rgba(180, 138, 90, 0.1); color: var(--text); }
+.img-placeholder { width: 100%; height: 300px; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-radius: var(--radius); margin-bottom: 1rem; border: 1px dashed var(--border); }
+header { background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 0.5rem 0; height: var(--header-h); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+.logo { font-family: var(--font-serif); font-size: 1.25rem; font-weight: bold; color: var(--accent); white-space: nowrap; }
+nav { position: absolute; top: var(--header-h); left: 0; right: 0; background: var(--bg); padding: 1rem; border-bottom: 1px solid var(--border); transform: translateY(-10px); opacity: 0; pointer-events: none; transition: 0.2s ease; }
+nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+nav ul { display: flex; flex-direction: column; gap: 1rem; }
+nav a { color: var(--text-muted); font-size: 1rem; padding: 0.5rem 0; display: block; }
+nav a:hover { color: var(--text); }
+.burger { background: none; border: none; cursor: pointer; padding: 0.5rem; min-height: 44px; min-width: 44px; }
+.burger svg { width: 24px; height: 24px; stroke: var(--text); stroke-width: 2; fill: none; }
+.phone-desktop { display: none; font-weight: 500; }
+
+.hero { padding: 4rem 0; text-align: center; }
+.hero-inner { max-width: 800px; margin: 0 auto; }
+.hero p { font-size: clamp(1rem, 2.5vw, 1.25rem); margin-bottom: 2rem; }
+.hero-actions { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+
+.about-grid { display: grid; gap: 2rem; }
+.about-stats { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; }
+.stat { flex: 1; min-width: 120px; text-align: center; background: var(--bg-alt); padding: 1rem; border-radius: var(--radius); }
+.stat strong { display: block; font-size: 1.5rem; color: var(--accent); }
+
+.services-grid { display: grid; gap: 1.5rem; }
+.service-card { background: var(--bg-alt); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border); transition: transform 0.2s; }
+.service-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.service-icon { width: 32px; height: 32px; margin-bottom: 0.75rem; stroke: var(--accent); fill: none; stroke-width: 2; }
+.price { color: var(--accent); font-weight: 500; margin-top: 0.5rem; display: block; font-size: 0.9rem; }
+
+.adv-grid { display: grid; gap: 1.5rem; }
+.adv-item { display: flex; gap: 1rem; align-items: flex-start; background: var(--bg-alt); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border); }
+.adv-icon { flex-shrink: 0; width: 24px; height: 24px; stroke: var(--accent); fill: none; margin-top: 0.25rem; }
+
+.steps { display: grid; gap: 1.5rem; counter-reset: step; }
+.step { background: var(--bg-alt); padding: 1.5rem; border-radius: var(--radius); position: relative; border: 1px solid var(--border); }
+.step::before { counter-increment: step; content: counter(step); display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; font-weight: bold; margin-bottom: 0.75rem; }
+
+.cases-grid { display: grid; gap: 1.5rem; }
+.case { background: var(--bg-alt); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border); }
+.case-meta { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.case-meta span { font-size: 0.9rem; }
+.case-meta strong { color: var(--text); }
+
+.faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.faq-item { background: var(--bg-alt); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.faq-btn { width: 100%; background: none; border: none; padding: 1rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 500; color: var(--text); min-height: 44px; }
+.faq-btn::after { content: '+'; font-size: 1.5rem; color: var(--accent); transition: transform 0.2s; }
+.faq-item.active .faq-btn::after { transform: rotate(45deg); }
+.faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-content p { padding: 0 1rem 1rem; margin: 0; }
+
+.contact-grid { display: grid; gap: 2rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+.form-group input, .form-group textarea { width: 100%; padding: 0.75rem; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); min-height: 44px; }
+.form-group textarea { min-height: 100px; resize: vertical; }
+.form-group input:focus, .form-group textarea:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+.checkbox-group { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+.checkbox-group input { margin-top: 0.25rem; }
+.contact-info { display: flex; flex-direction: column; gap: 1rem; }
+.contact-item { display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); }
+.map-placeholder { width: 100%; height: 200px; background: var(--bg-alt); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-muted); margin-top: 1rem; border: 1px dashed var(--border); }
+
+footer { background: var(--bg-alt); padding: 2rem 0; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--text-muted); text-align: center; }
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; flex-wrap: wrap; }
+.disclaimer { max-width: 800px; margin: 0 auto 1rem; font-style: italic; opacity: 0.8; }
+
+@media (min-width: 768px) {
+  .hero-actions { flex-direction: row; justify-content: center; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .adv-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .cases-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: repeat(2, 1fr); }
+  nav { position: static; background: transparent; padding: 0; border: none; transform: none; opacity: 1; pointer-events: auto; }
+  nav ul { flex-direction: row; gap: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .phone-desktop { display: block; color: var(--accent); font-weight: 500; }
+  .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+  .adv-grid { grid-template-columns: repeat(4, 1fr); }
+  .steps { grid-template-columns: repeat(4, 1fr); }
+  .burger { display: none; }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="container header-inner">
+<a href="#" class="logo">Адвокат Н. Долганова</a>
+<nav id="mainNav">
+<ul>
+<li><a href="#about">О адвокате</a></li>
+<li><a href="#services">Услуги</a></li>
+<li><a href="#steps">Как работаем</a></li>
+<li><a href="#cases">Практика</a></li>
+<li><a href="#faq">Вопросы</a></li>
+<li><a href="#contacts">Контакты</a></li>
+</ul>
+</nav>
+<a href="tel:+79991234567" class="phone-desktop">+7 (999) 123-45-67</a>
+<button class="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
+<svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+</div>
+</header>
+
+<main>
+<section class="hero" id="hero">
+<div class="container hero-inner">
+<h1>Юридическая защита с фокусом на ваши интересы</h1>
+<p>Конфиденциальные консультации, прозрачный процесс и стратегия, выстроенная под вашу ситуацию. Работаю строго в рамках закона и профессиональной этики.</p>
+<div class="hero-actions">
+<a href="#contacts" class="btn">Записаться на консультацию</a>
+<a href="#services" class="btn btn-outline">Посмотреть услуги</a>
+</div>
+</div>
+</section>
+<section id="about">
+  <div class="container">
+    <h2>О Наталье Долгановой</h2>
+    <div class="about-grid">
+      <div><div class="img-placeholder" aria-hidden="true">Фото адвоката</div></div>
+      <div>
+        <p>Адвокат с опытом ведения дел в судах общей юрисдикции и арбитражных инстанциях. Специализируюсь на комплексном подходе: от первичного анализа документов до полного сопровождения процесса.</p>
+        <p>В работе придерживаюсь принципов конфиденциальности, честной оценки перспектив и отсутствия скрытых платежей. Каждый случай рассматриваю индивидуально, без шаблонных решений.</p>
+        <div class="about-stats">
+          <div class="stat"><strong>10+</strong> лет практики</div>
+          <div class="stat"><strong>500+</strong> консультаций</div>
+          <div class="stat"><strong>3</strong> основных направления</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="background: var(--bg-alt);">
+  <div class="container">
+    <h2>Направления работы</h2>
+    <div class="services-grid">
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3>Защита по уголовным делам</h3>
+        <p>Анализ материалов, подготовка позиции, участие в следственных действиях и суде.</p>
+        <span class="price">от 30 000 ₽ / этап</span>
+      </article>
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3>Семейные споры</h3>
+        <p>Расторжение брака, раздел имущества, алименты, определение порядка общения с детьми.</p>
+        <span class="price">по договорённости</span>
+      </article>
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        <h3>Недвижимость и сделки</h3>
+        <p>Проверка юридической чистоты, сопровождение купли-продажи, защита прав собственников.</p>
+        <span class="price">от 15 000 ₽</span>
+      </article>
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <h3>Гражданские иски</h3>
+        <p>Взыскание долгов, защита прав потребителей, трудовые споры, наследственные дела.</p>
+        <span class="price">от 20 000 ₽</span>
+      </article>
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h3>Юридическое сопровождение бизнеса</h3>
+        <p>Аудит договоров, претензионная работа, представительство в арбитраже.</p>
+        <span class="price">по договорённости</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="advantages">
+  <div class="container">
+    <h2>Почему доверяют</h2>
+    <div class="adv-grid">
+      <div class="adv-item">
+        <svg class="adv-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div><h3>Конфиденциальность</h3><p>Адвокатская тайна защищена законом. Информация не передаётся третьим лицам.</p></div>
+      </div>
+      <div class="adv-item">
+        <svg class="adv-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <div><h3>Прозрачность</h3><p>Фиксированные условия сотрудничества, чёткий план действий, регулярные отчёты.</p></div>
+      </div>
+      <div class="adv-item">
+        <svg class="adv-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        <div><h3>Личное участие</h3><p>Все ключевые этапы веду лично, без передачи дел ассистентам.</p></div>
+      </div>
+      <div class="adv-item">
+        <svg class="adv-icon" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <div><h3>Реалистичная оценка</h3><p>Честно обозначаю перспективы и риски до начала работы. Никаких пустых обещаний.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="steps" style="background: var(--bg-alt);">
+  <div class="container">
+    <h2>Как мы работаем</h2>
+    <div class="steps">
+      <div class="step"><h3>1. Обращение</h3><p>Оставляете заявку или звоните. Проводим первичный разговор для понимания ситуации.</p></div>
+      <div class="step"><h3>2. Анализ</h3><p>Изучаю документы, оцениваю риски и перспективы, формирую правовую позицию.</p></div>
+      <div class="step"><h3>3. Стратегия</h3><p>Согласуем план действий, заключаем соглашение, определяем стоимость и этапы.</p></div>
+      <div class="step"><h3>4. Сопровождение</h3><p>Веду дело, информирую о ходе, готовлю документы, представляю интересы в инстанциях.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="container">
+    <h2>Практика</h2>
+    <div class="cases-grid">
+      <article class="case">
+        <h3>Раздел совместно нажитого имущества</h3>
+        <div class="case-meta">
+          <span><strong>Задача:</strong> Защита прав при разделе квартиры и вкладов.</span>
+          <span><strong>Действия:</strong> Сбор доказательств личного характера вложений, независимая оценка, переговоры.</span>
+          <span><strong>Итог:</strong> Досудебное соглашение с сохранением доли и минимизацией издержек.</span>
+        </div>
+      </article>
+      <article class="case">
+        <h3>Взыскание задолженности по договору</h3>
+        <div class="case-meta">
+          <span><strong>Задача:</strong> Возврат средств за невыполненные работы.</span>
+          <span><strong>Действия:</strong> Претензионная работа, подготовка иска, участие в арбитраже.</span>
+          <span><strong>Итог:</strong> Полное удовлетворение иска, взыскание расходов на услуги адвоката.</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background: var(--bg-alt);">
+  <div class="container">
+    <h2>Частые вопросы</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false">Сколько стоит первичная консультация?</button><div class="faq-content"><p>Первичный разбор ситуации по телефону или в мессенджере проводится бесплатно. Очная консультация с анализом документов оплачивается согласно прайсу, который обсуждается заранее.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false">Гарантируете ли вы положительный результат?</button><div class="faq-content"><p>Адвокатская этика и закон не позволяют давать стопроцентных гарантий. Я предоставляю реалистичную оценку перспектив, основанную на практике и нормативной базе, и работаю на максимально эффективный исход.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false">Как обеспечивается конфиденциальность?</button><div class="faq-content"><p>Все сведения, переданные адвокату, охраняются адвокатской тайной (ст. 8 ФЗ «Об адвокатской деятельности»). Данные не разглашаются без вашего согласия.</p></div></div>
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false">Можно ли работать дистанционно?</button><div class="faq-content"><p>Да. Консультации, согласование документов и подготовка позиции проводятся онлайн. Для судебных заседаний в ряде регионов возможно участие по видеосвязи.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="container">
+    <h2>Связаться со мной</h2>
+    <div class="contact-grid">
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Имя</label>
+          <input type="text" id="name" name="name" placeholder="Как к вам обращаться?" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Краткое описание ситуации</label>
+          <textarea id="message" name="message" placeholder="Опишите вопрос в 2–3 предложениях..."></textarea>
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="consent" name="consent" required>
+          <label for="consent">Даю согласие на обработку персональных данных в соответствии с ФЗ-152</label>
+        </div>
+        <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-item">📞 <a href="tel:+79991234567">+7 (999) 123-45-67</a></div>
+        <div class="contact-item">✉️ <a href="mailto:info@dolganova-law.ru">info@dolganova-law.ru</a></div>
+        <div class="contact-item">📍 г. Москва, ул. Примерная, д. 10, оф. 205</div>
+        <div class="contact-item">🕒 Пн–Пт: 10:00–19:00</div>
+        <div class="map-placeholder" aria-label="Карта расположения офиса">Карта (Яндекс/Google)</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+<div class="container">
+<p class="disclaimer">Информация на сайте носит ознакомительный характер и не является публичной офертой. Результаты дел зависят от конкретных обстоятельств и не гарантируются в соответствии с Кодексом профессиональной этики адвоката.</p>
+<div class="footer-links">
+<a href="#">Политика конфиденциальности</a>
+<a href="https://t.me/username" target="_blank" rel="noopener">Telegram</a>
+<a href="https://wa.me/79991234567" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+<p>&copy; 2024–2026 Адвокатская контора Натальи Долгановой. Все права защищены.</p>
+</div>
+</footer>
+
+<script>
+const burger = document.querySelector('.burger');
+const nav = document.getElementById('mainNav');
+const navLinks = nav.querySelectorAll('a');
+let menuOpen = false;
+
+burger.addEventListener('click', () => {
+menuOpen = !menuOpen;
+nav.classList.toggle('open', menuOpen);
+burger.setAttribute('aria-expanded', menuOpen);
+});
+
+navLinks.forEach(link => {
+link.addEventListener('click', () => {
+if (menuOpen) {
+menuOpen = false;
+nav.classList.remove('open');
+burger.setAttribute('aria-expanded', 'false');
+}
+});
+});
+
+document.querySelectorAll('.faq-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+const item = btn.parentElement;
+const content = btn.nextElementSibling;
+const isOpen = item.classList.contains('active');
+
+document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+activeItem.classList.remove('active');
+activeItem.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+activeItem.querySelector('.faq-content').style.maxHeight = '0';
+});
+
+if (!isOpen) {
+item.classList.add('active');
+btn.setAttribute('aria-expanded', 'true');
+content.style.maxHeight = content.scrollHeight + 'px';
+}
+});
+});
+
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', (e) => {
+e.preventDefault();
+const name = form.name.value.trim();
+const phone = form.phone.value.replace(/\D/g, '');
+const consent = form.consent.checked;
+const phoneValid = /^\d{10,11}$/.test(phone);
+
+let errorMsg = [];
+if (!name) errorMsg.push('Укажите имя.');
+if (!phoneValid) errorMsg.push('Введите корректный номер телефона.');
+if (!consent) errorMsg.push('Необходимо согласие на обработку данных.');
+
+if (errorMsg.length > 0) {
+alert('Пожалуйста, исправьте ошибки:\n' + errorMsg.join('\n'));
+return;
+}
+
+console.log('Form Data:', { name, phone: form.phone.value, message: form.message.value });
+alert('Заявка успешно отправлена! Я свяжусь с вами в ближайшее время.');
+form.reset();
+});
+
+const phoneInput = document.getElementById('phone');
+phoneInput.addEventListener('input', (e) => {
+let val = e.target.value.replace(/\D/g, '');
+if (val.length > 0) {
+if (val[0] === '7' || val[0] === '8') val = val.substring(1);
+let formatted = '+7';
+if (val.length > 0) formatted += ' (' + val.substring(0, 3);
+if (val.length >= 3) formatted += ') ' + val.substring(3, 6);
+if (val.length >= 6) formatted += '-' + val.substring(6, 8);
+if (val.length >= 8) formatted += '-' + val.substring(8, 10);
+e.target.value = formatted;
+}
+});
+</script>
+</body>
+</html>
